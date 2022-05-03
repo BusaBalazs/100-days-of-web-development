@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Eatwell - Make The World A Tastier Place</title>
+    <link rel="preconnect" href="https://fonts.gstatic.com" />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Roboto+Condensed:wght@700&family=Roboto:wght@400;700&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="./styles/shared.css" />
+    <link rel="stylesheet" href="./styles/restaurants.css" />
+    <script src="scripts/responsive.js" defer></script>
+  </head>
+  <body>
+    <%- include("includes/header") %>
+    <%- include("includes/aside") %>
+    <main>
+      <h1>Recommended restaurants</h1>
+      <% if (numberOfRestaurants === 0) { %>
+          <p>There is no restaurant yet - maybe you want to recommand one?</p>
+        <% }else { %>
+          <p>Find your next favorite restaurants with help of our other users!</p>
+          <p>We found <%= numberOfRestaurants %> restaurant(s)</p>
+          <ul id="restaurants-list">
+            <!-- creat javaScript for loop with ejs template for dynamic html -->
+            <% for (const restaurantItem of restaurants) { %>
+              <!-- connect the dynamic list (li) tag from the restaurant-list.ejs file.
+              the tricki part of that, is the include() method's second parameter is an object.
+              The object's key is the key which we use in the dynamic <li> tag, and the object's value was declared in the loop (udemy: inculde Partial Content lesson 12:40) -->
+              <%- include("includes/restaurant/restaurant-list", {restaurant: restaurantItem}) %>
+            <% } %>
+          </ul>
+        <% } %>  
+      
+    </main>
+  </body>
+</html>
